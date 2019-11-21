@@ -1,0 +1,219 @@
+.App {
+  text-align: center;
+}
+
+body, html{
+  background-color: #264e86;
+  padding: 0;
+  margin: 0;
+}
+
+.App p{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 120%;
+  color: #264e86;
+}
+
+.App h1{
+  color: #f4f4f4;
+  margin: 0;
+  padding: 100px;
+  font-weight: bold;
+  font-size: 300%;
+}
+
+.App-header {
+  background: linear-gradient(to left, #264e86 99.9%, #333 0.1%);
+  min-height: 81.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+ 
+}
+
+.loginbox
+{
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    height: 600px;
+    padding: 180px 80px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.user
+{
+    width: 225px;
+    height: 225px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: calc(-100px/120);
+    left: calc(40% - 50px);
+}
+
+.loginbox h2{
+    margin: 0;
+    padding: 0px 20px;
+    color: #070e18;
+    text-align: center;
+    font-size: 250%;
+}
+
+.loginbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: #264e86;
+}
+.loginbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.loginbox input[type = "text"],
+.loginbox input[type = "password"]{
+  text-align: center;
+    border: none;
+    border-bottom: 1px solid #000000;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #000000;
+    font-size: 18px;
+}
+::placeholder{
+    color: rgba(255, 255, 255, 0.986);
+}
+
+.loginbox input[type = "submit"]{
+    border: none;
+    outline: none;
+    height:  40px;
+    color: #fff;
+    font-size: 16px;
+    background: #264e86;
+    cursor: pointer;
+    border-radius: 20px;
+}
+.loginbox input[type = "submit"]:hover
+{
+    background: #fff;
+    color: #264e86;
+}
+.loginbox a{
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+.button {
+  transform: translate(0%,850%);
+  margin: 0;
+  display: inline-block;
+  border-radius: 40px;
+  background-color: #f4f3f4;
+  border: none;
+  color: #070e18;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+ 
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.registerbox{
+  position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    height: 750px;
+    padding: 50px 80px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.registerbox h2{
+  margin: 0;
+  padding: 0 20px;
+  color: #264e86;
+  text-align: center;
+  font-size: 220%;
+  
+}
+
+.registerbox p{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  color: #264e86;
+}
+.registerbox input{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.registerbox input[type = "text"],
+.registerbox input[type = "password"]{
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #000000;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #f4f4f4;
+  font-size: 16px;
+}
+::placeholder{
+  color: rgba(0, 0, 0, 0.5);
+}
+.registerbox input[type = "submit"]{
+  border: none;
+  outline: none;
+  height:  40px;
+  color: #fff;
+  font-size: 16px;
+  background: #333;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.registerbox input[type = "submit"]:hover
+{
+  background: #fff;
+  color: #333;
+}
