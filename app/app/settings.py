@@ -26,7 +26,7 @@ SECRET_KEY = ')s7lk+))^p9q=d_fi55yg9!=rv&7x&wiumm4_4x#kbc1@2)k9d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # My Apps
     'api.apps.ApiConfig',
     'rate.apps.RateConfig',
     'user.apps.UserConfig',
-    'news.apps.NewsConfig'
+    'news.apps.NewsConfig',
+    # Third-Party Apps
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +135,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'user.CustomUser'
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/user/login'

@@ -1,6 +1,13 @@
 from django.db import models
 from user.models import CustomUser
 
+class Tag(models.Model):
+    # professor_rate = models.ForeignKey(ProfessorRate, on_delete=models.CASCADE)
+    name = models.CharField(max_length=120)
+
+    def __str__(self):
+        return self.name
+
 class Location(models.Model):
     x = models.DecimalField(decimal_places=20, max_digits=30, blank=True, null=True)
     y = models.DecimalField(decimal_places=20, max_digits=30, blank=True, null=True)
@@ -48,6 +55,7 @@ class ProfessorRate(models.Model):
     notebook = models.BooleanField(default=False)
     attendance = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now=True)
+    tags = models.ManyToManyField(Tag, related_name='tags', related_query_name='tags', null=True, blank=True)
 
     def __str__(self):
         return "User: {} --> Professor: {}".format(self.user, self.professor)
@@ -70,10 +78,5 @@ class UniversityRate(models.Model):
     def __str__(self):
         return "User: {} --> University: {}".format(self.user, self.university)
 
-class Tag(models.Model):
-    professor_rate = models.ForeignKey(ProfessorRate, on_delete=models.CASCADE)
-    name = models.CharField(max_length=120)
 
-    def __str__(self):
-        return self.name
 
