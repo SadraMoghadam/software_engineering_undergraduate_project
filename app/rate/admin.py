@@ -1,12 +1,17 @@
 from django.contrib import admin
 
-from .models import University, Department, UniversityRate, ProfessorRate, Location, Tag, Course
+from .models import University, Department
+from .models import UniversityRate, ProfessorRate
+from .models import Location, Tag, Course
+
 
 class UniversityAdmin(admin.ModelAdmin):
     pass
 
+
 class DepartmentAdmin(admin.ModelAdmin):
     pass
+
 
 admin.site.register(University, UniversityAdmin)
 admin.site.register(Department, DepartmentAdmin)

@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # My Apps
-    'api.apps.ApiConfig',
     'rate.apps.RateConfig',
     'user.apps.UserConfig',
     'news.apps.NewsConfig',

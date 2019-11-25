@@ -16,11 +16,13 @@ def login_user(request):
             _login(request, user)
         if user.is_authenticated:
             return JsonResponse({'result': True})
-    
+
     return JsonResponse({'result': False})
+
 
 def register_user(request):
     pass
+
 
 def get_users(request):
     pass
