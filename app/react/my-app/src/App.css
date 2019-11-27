@@ -16,6 +16,7 @@ body, html{
   color: #264e86;
 }
 
+
 .App h1{
   color: #f4f4f4;
   margin: 0;
@@ -24,8 +25,12 @@ body, html{
   font-size: 300%;
 }
 
+.App h2{
+  transform: translate(0%,-85%);
+}
+
 .App-header {
-  background: linear-gradient(to left, #264e86 99.9%, #333 0.1%);
+  background: #264e86 ;
   min-height: 81.5vh;
   display: flex;
   flex-direction: column;
@@ -38,12 +43,10 @@ body, html{
 .loginbox
 {
     position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 600px;
+    transform: translate(100%,0%);
+    width: 500px;
     height: 600px;
-    padding: 180px 80px;
+    padding: 250px 120px;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.5);
 }
@@ -92,10 +95,18 @@ body, html{
     color: rgba(255, 255, 255, 0.986);
 }
 
+.loginbox input[type = "text"]:hover {
+  border-color: #3a38d8;
+}
+.loginbox input[type = "password"]:hover{
+ border-color: #3a38d8;
+}
+
 .loginbox input[type = "submit"]{
     border: none;
     outline: none;
-    height:  40px;
+    height:  45px;
+    width: 150px;
     color: #fff;
     font-size: 16px;
     background: #264e86;
@@ -104,8 +115,8 @@ body, html{
 }
 .loginbox input[type = "submit"]:hover
 {
-    background: #fff;
-    color: #264e86;
+    background: #053a00;
+    color: #fff;
 }
 .loginbox a{
     color: #fff;
@@ -116,7 +127,7 @@ body, html{
 
 
 .button {
-  transform: translate(0%,850%);
+  transform: translate(-5%,850%);
   margin: 0;
   display: inline-block;
   border-radius: 40px;
@@ -130,6 +141,11 @@ body, html{
   transition: all 0.5s;
   cursor: pointer;
  
+}
+
+.button:hover{
+  background: #053a00;
+  color: #fff;
 }
 
 .button span {
@@ -163,7 +179,7 @@ body, html{
     left: 50%;
     transform: translate(-50%,-50%);
     width: 600px;
-    height: 750px;
+    height: 600px;
     padding: 50px 80px;
     box-sizing: border-box;
     background: rgba(255, 255, 255, 0.5);
@@ -171,7 +187,7 @@ body, html{
 
 .registerbox h2{
   margin: 0;
-  padding: 0 20px;
+  padding: 20px 20px;
   color: #264e86;
   text-align: center;
   font-size: 220%;
@@ -196,7 +212,7 @@ body, html{
   background: transparent;
   outline: none;
   height: 40px;
-  color: #f4f4f4;
+  color: #000;
   font-size: 16px;
 }
 ::placeholder{
@@ -206,14 +222,171 @@ body, html{
   border: none;
   outline: none;
   height:  40px;
+  width: 175px;
   color: #fff;
   font-size: 16px;
-  background: #333;
+  background: #264e86;
   cursor: pointer;
   border-radius: 20px;
 }
 .registerbox input[type = "submit"]:hover
 {
-  background: #fff;
-  color: #333;
+  background: #053a00;
+  color: #fff;
+}
+
+.buttonStudent{
+transform: translate(50%,20%);
+  margin: 0;
+  display: inline-block;
+  border-radius: 40px;
+  background-color: #f4f3f4;
+  border: none;
+  color: #070e18;
+  text-align: center;
+  font-size: 35px;
+  padding: 30px;
+  width: 255px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.buttonStudent span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.buttonStudent span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.buttonStudent:hover{
+  background: #053a00;
+  color: #fff;
+}
+
+.buttonStudent:hover span {
+  padding-right: 25px;
+}
+
+.buttonStudent:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.buttonOstad{
+  transform: translate(-50%,150%);
+  margin: 0;
+  display: inline-block;
+  border-radius: 40px;
+  background-color: #f4f3f4;
+  border: none;
+  color: #070e18;
+  text-align: center;
+  font-size: 35px;
+  padding: 30px;
+  width: 255px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.buttonOstad:hover{
+  background: #053a00;
+  color: #fff;
+}
+
+.buttonOstad span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.buttonOstad span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+  
+}
+
+.buttonOstad:hover span {
+  padding-right: 25px;
+}
+
+.buttonOstad:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.registerOstadbox{
+  position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    height: 800px;
+    padding: 50px 80px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.registerOstadbox h2{
+  margin: 0;
+  padding: 20px 20px;
+  color: #264e86;
+  text-align: center;
+  font-size: 220%;
+  
+}
+
+.registerOstadbox p{
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  color: #264e86;
+}
+.registerOstadbox input{
+  width: 100%;
+  margin-bottom: 20px;
+}
+.registerOstadbox input[type = "text"],
+.registerOstadbox input[type = "password"]{
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid #000000;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #000;
+  font-size: 16px;
+}
+::placeholder{
+  color: rgba(0, 0, 0, 0.5);
+}
+.registerOstadbox input[type = "submit"]{
+  border: none;
+  outline: none;
+  height:  40px;
+  width: 175px;
+  color: #fff;
+  font-size: 16px;
+  background: #264e86;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.registerOstadbox input[type = "submit"]:hover
+{
+  background: #053a00;
+  color: #fff;
 }
