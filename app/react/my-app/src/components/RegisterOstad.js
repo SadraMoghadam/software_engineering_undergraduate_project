@@ -2,16 +2,20 @@
 import React, {Component} from 'react';
 import '../App.css';
 
-class Register extends Component {
+class RegisterOstad extends Component {
   
   render() {
     return (
     <div className="App">
-      <div className="registerbox">
-        <h2>ثبت نام دانشجو</h2>
-        <p>_______________________________________________________</p>
+      <div className="registerOstadbox">
+        <h2>ثبت نام استاد</h2>
+       
         <form>
-          <p>شماره دانشجویی</p>
+        <p>نام</p>
+          <input type="text" name="" placeholder="Enter Student Number"></input>
+          <p>نام خانوادگی</p>
+          <input type="text" name="" placeholder="Enter Student Number"></input>
+          <p>شماره پرسنلی</p>
           <input type="text" name="" placeholder="Enter Student Number"></input>
           <p>ایمیل</p>
           <input type="text" name="" placeholder="Enter Email"></input>
@@ -28,4 +32,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default RegisterOstad;
