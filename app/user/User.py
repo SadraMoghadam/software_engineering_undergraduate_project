@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as _login
 from django.http import JsonResponse
-# api view for csrf token
+# api view for csrf token 2
 from rest_framework.decorators import api_view
 
 
