@@ -9,12 +9,12 @@ class Register extends Component {
     <div className="App">
       <div className="registerbox">
         <h2>ثبت نام دانشجو</h2>
-        <p>_______________________________________________________</p>
+        
         <form>
           <p>شماره دانشجویی</p>
-          <input type="text" name="" placeholder="Enter Student Number"></input>
+          <input type="text" name="" placeholder="شماره دانشجویی خود را وارد کنید"></input>
           <p>ایمیل</p>
-          <input type="text" name="" placeholder="Enter Email"></input>
+          <input type="text" name="" placeholder="ایمیل خود را وارد کنید"></input>
           <p>رمز عبور</p>
           <input type="password" name="" placeholder="**********"></input>
           <p>تایید رمز عبور</p>

@@ -96,10 +96,10 @@ body, html{
 }
 
 .loginbox input[type = "text"]:hover {
-  border-color: #3a38d8;
+  border-color: #168d0c;
 }
 .loginbox input[type = "password"]:hover{
- border-color: #3a38d8;
+ border-color: #168d0c;
 }
 
 .loginbox input[type = "submit"]{
@@ -115,7 +115,7 @@ body, html{
 }
 .loginbox input[type = "submit"]:hover
 {
-    background: #053a00;
+    background: #168d0c;
     color: #fff;
 }
 .loginbox a{
@@ -144,7 +144,7 @@ body, html{
 }
 
 .button:hover{
-  background: #053a00;
+  background: #168d0c;
   color: #fff;
 }
 
@@ -188,7 +188,7 @@ body, html{
 .registerbox h2{
   margin: 0;
   padding: 20px 20px;
-  color: #264e86;
+  color: #000;
   text-align: center;
   font-size: 220%;
   
@@ -215,6 +215,13 @@ body, html{
   color: #000;
   font-size: 16px;
 }
+
+.registerbox input[type = "text"]:hover {
+  border-color: #168d0c;
+}
+.registerbox input[type = "password"]:hover{
+ border-color: #168d0c;
+}
 ::placeholder{
   color: rgba(0, 0, 0, 0.5);
 }
@@ -231,7 +238,7 @@ body, html{
 }
 .registerbox input[type = "submit"]:hover
 {
-  background: #053a00;
+  background: #168d0c;
   color: #fff;
 }
 
@@ -267,7 +274,7 @@ transform: translate(50%,20%);
 }
 
 .buttonStudent:hover{
-  background: #053a00;
+  background: #168d0c;
   color: #fff;
 }
 
@@ -298,7 +305,7 @@ transform: translate(50%,20%);
 }
 
 .buttonOstad:hover{
-  background: #053a00;
+  background: #168d0c;
   color: #fff;
 }
 
@@ -344,7 +351,7 @@ transform: translate(50%,20%);
 .registerOstadbox h2{
   margin: 0;
   padding: 20px 20px;
-  color: #264e86;
+  color: #000;
   text-align: center;
   font-size: 220%;
   
@@ -371,6 +378,13 @@ transform: translate(50%,20%);
   color: #000;
   font-size: 16px;
 }
+
+.registerOstadbox input[type = "text"]:hover {
+  border-color: #168d0c;
+}
+.registerOstadbox input[type = "password"]:hover{
+ border-color: #168d0c;
+}
 ::placeholder{
   color: rgba(0, 0, 0, 0.5);
 }
@@ -387,6 +401,6 @@ transform: translate(50%,20%);
 }
 .registerOstadbox input[type = "submit"]:hover
 {
-  background: #053a00;
+  background: #168d0c;
   color: #fff;
 }
