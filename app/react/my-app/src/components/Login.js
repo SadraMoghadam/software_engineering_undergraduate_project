@@ -17,24 +17,29 @@ class Login extends Component {
   render() {
     return (
     <div className="App">
-      <h1>! خوش آمدید </h1>
-        <div className="loginbox">
-        <img src= {logo} className="user"></img>
+      <img src= {logo} className="userr"></img>
+        <div className="sidebar">
+          <a href="#home">صفحه اصلی</a>
+          <a href="#news">اخبار</a>
+          <a href="#contact">تماس با ما</a>
+          <a href="#about">درباره سایت</a>
+        </div>
+
+    <form className="searchBar">
+      <input type = "text" name = "search" placeholder = "استاد یا دانشگاه مورد نظر خود را جستجو کنید"></input>
+    </form>
+    
+    <div className="loginbox">
         <h2>ورود</h2>
-        
         <form>
           <p>نام کاربری</p>
           <input type="text" name="" placeholder="شماره دانشجویی"></input>
           <p>رمز عبور</p>
           <input type="password" name="" placeholder="**********"></input>
           <input type="submit" name="" value="ورود"></input>
-          
-    
         </form>
-        </div>
-       
+    </div>
         <button className="button" onClick={this.ClickButton}><span>ثبت نام</span></button>
-       
         </div>
     );
   }
