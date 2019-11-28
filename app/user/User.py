@@ -12,7 +12,7 @@ def login_user(request):
     password = data.get('password')
     user = authenticate(username=username, password=password)
     if user:
-        if user.is_active:
+        if user.is_active and (not user.is_professor):
             _login(request, user)
         if user.is_authenticated:
             return JsonResponse({'result': True})

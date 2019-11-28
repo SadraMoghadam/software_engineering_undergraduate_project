@@ -1,5 +1,5 @@
 from django.urls import path
-from .University import get_universities, get_rates
+from .University import *
 
 app_name = 'rate'
 urlpatterns = [
@@ -9,4 +9,9 @@ urlpatterns = [
         get_rates,
         name='get_rates'
         ),
+    path(
+        'get-university-departments/<int:university_id>/',
+        get_departments,
+        name='get_departments'
+    ),
 ]

@@ -1,11 +1,26 @@
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as _login
+
 from .models import CustomUser
+from rate.models import Course, ProfessorRate
 
 from rest_framework.decorators import api_view
 
 
+@api_view(['POST'])
 def login_professor(request):
-    pass
+    data = request.POST
+    username = int(data.get('username'))
+    password = data.get('password')
+    user = authenticate(username=username, password=password)
+    if user:
+        if user.is_professor and user.is_active:
+            _login(request, user)
+        if user.is_authenticated:
+            return JsonResponse({'result': True})
+    return JsonResponse({'result': False})
 
 
 @api_view(['POST'])
@@ -28,24 +43,47 @@ def register_professor(request):
         return JsonResponse({'result': False})
 
 
+@api_view(['GET'])
 def get_professors(request):
-    pass
+    professors = CustomUser.objects.filter(
+        is_professor=True, is_active=True
+        ).values('username', 'email', 'first_name', 'last_name', 'profile_photo')
+    return JsonResponse({'result': list(professors)})
 
 
+@api_view(['GET'])
 def get_courses(request, professor_id):
-    # with professor id
-    pass
+    professor = get_object_or_404(CustomUser, username=professor_id)
+    courses = Course.objects.filter(professor=professor).values()
+    return JsonResponse({'result': list(courses)})
 
 
+@api_view(['POST'])
 def add_course(request, professor_id):
-    # with professor id
     # users can not do this
-    pass
+    # Issue CSRF Missing
+    user = request.user
+    if user.is_authenticated:
+        if user.is_active and user.is_professor:
+            data = request.POST
+            course_name = data.get('name')
+            professor = get_object_or_404(CustomUser, username=professor_id)
+            Course.objects.create(professor=professor, name=course_name)
+            return JsonResponse({'result': True})
+        else:
+            return JsonResponse(
+                    {
+                    'detail': 'User is not active or he/she is not a professor',
+                    }
+                )
+    return JsonResponse({'detail': 'user is not authenticated'})
 
 
+@api_view(['GET'])
 def get_rates(request, professor_id):
-    # with professor id
-    pass
+    professor = get_object_or_404(CustomUser, username=professor_id)
+    rates = ProfessorRate.objects.filter(professor=professor).values()
+    return JsonResponse({'result': list(rates)})
 
 
 def submit_rate(request):
