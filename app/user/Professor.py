@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as _login
+from django.contrib.auth.decorators import login_required
 
 from .models import CustomUser
 from rate.models import Course, ProfessorRate
@@ -52,6 +53,29 @@ def get_professors(request):
 
 
 @api_view(['GET'])
+def get_top_professors(request):
+    top_rates = ProfessorRate.objects.all().order_by('-overall_score').values()
+    top_professors = []
+
+    for rate in top_rates:
+        professor = CustomUser.objects.get(username=rate['professor_id'])
+        json = {
+                'username': professor.username,
+                'first_name': professor.first_name,
+                'last_name': professor.last_name,
+                'email': professor.email,
+            }
+        if professor.profile_photo:
+            json['profile_photo'] = professor.profile_photo.url
+        else:
+            json['profile_photo'] = None
+        top_professors.append(
+            json
+        )
+    return JsonResponse({'result': top_professors})
+
+
+@api_view(['GET'])
 def get_courses(request, professor_id):
     professor = get_object_or_404(CustomUser, username=professor_id)
     courses = Course.objects.filter(professor=professor).values()
@@ -86,6 +110,34 @@ def get_rates(request, professor_id):
     return JsonResponse({'result': list(rates)})
 
 
+@login_required
+@api_view(['POST'])
 def submit_rate(request):
     # with professor id and user id
-    pass
+    user = request.user
+    if (not user.is_professor) and user.is_active:
+        data = request.POST
+        professor_id = data.get('professor_id')  # or url ?
+        professor = get_object_or_404(CustomUser, username=professor_id)
+        comment = data.get('comment')
+        difficaullty = data.get('difficaullty')
+        quality = data.get('quality')
+        grade_rate = data.get('grade_rate')
+        notebook = data.get('notebook')
+        attendance = data.get('attendance')
+        # tags ??
+
+        ProfessorRate.objects.create(
+            user=user,
+            professor=professor,
+            comment=comment,
+            difficaullty=difficaullty,
+            quality=quality,
+            grade_rate=grade_rate,
+            notebook=bool(notebook),
+            attendance=bool(attendance),
+            # Tags ?
+        )
+
+        return JsonResponse({'result': True})
+    return JsonResponse({'detail': 'Authentication not failed'})

@@ -14,4 +14,10 @@ urlpatterns = [
         get_departments,
         name='get_departments'
     ),
+    path('submite-your-rate/', submit_rate, name='submit_rate'),
+    path(
+        'get-top-universities/',
+        get_top_universities,
+        name='get_top_universities'
+        ),
 ]
