@@ -82,24 +82,24 @@ def get_courses(request, professor_id):
     return JsonResponse({'result': list(courses)})
 
 
+@login_required
 @api_view(['POST'])
 def add_course(request, professor_id):
     # users can not do this
     # Issue CSRF Missing
     user = request.user
-    if user.is_authenticated:
-        if user.is_active and user.is_professor:
-            data = request.POST
-            course_name = data.get('name')
-            professor = get_object_or_404(CustomUser, username=professor_id)
-            Course.objects.create(professor=professor, name=course_name)
-            return JsonResponse({'result': True})
-        else:
-            return JsonResponse(
-                    {
-                    'detail': 'User is not active or he/she is not a professor',
-                    }
-                )
+    if user.is_active and user.is_professor:
+        data = request.POST
+        course_name = data.get('name')
+        professor = get_object_or_404(CustomUser, username=professor_id)
+        Course.objects.create(professor=professor, name=course_name)
+        return JsonResponse({'result': True})
+    else:
+        return JsonResponse(
+                {
+                'detail': 'User is not active or he/she is not a professor',
+                }
+            )
     return JsonResponse({'detail': 'user is not authenticated'})
 
 

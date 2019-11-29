@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rate.apps.RateConfig',
     'user.apps.UserConfig',
     'news.apps.NewsConfig',
+    'search.apps.SearchConfig',
     # Third-Party Apps
     'rest_framework',
 ]
