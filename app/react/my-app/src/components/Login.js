@@ -9,7 +9,8 @@ import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
   state = {
-    redirect: false
+    redirect: false,
+    redirectHome:false
   } 
 
     setRedirect = () => {
@@ -23,6 +24,17 @@ class Login extends Component {
       }
     }
 
+    setRedirectHome = () => {
+      this.setState({
+        redirectHome: true
+      })
+    }
+
+    renderRedirectHome = () => {
+      if (this.state.redirectHome) {
+        return <Redirect to='./' />
+      }
+    }
 
 
   render() {
@@ -30,7 +42,7 @@ class Login extends Component {
     <div className="App">
       <img src= {logo} className="userr"></img>
         <div className="sidebar">
-          <a href="#home">صفحه اصلی</a>
+        <a href="#home" onClick={this.setRedirectHome}>{this.renderRedirectHome()}صفحه اصلی</a>
           <a href="#news">اخبار</a>
           <a href="#contact">تماس با ما</a>
           <a href="#about">درباره سایت</a>

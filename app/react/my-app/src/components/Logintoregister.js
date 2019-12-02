@@ -6,7 +6,8 @@ import { Redirect } from 'react-router-dom'
 class Logintoregister extends Component {
     state = {
         redirectProfessor: false,
-        redirectStudent:false
+        redirectStudent:false,
+        redirectHome: false
       } 
     
         setRedirectProfessor = () => {
@@ -30,6 +31,18 @@ class Logintoregister extends Component {
             return <Redirect to='./Register' />
           }
         }
+      
+          setRedirectHome = () => {
+            this.setState({
+              redirectHome: true
+            })
+          }
+  
+          renderRedirectHome = () => {
+            if (this.state.redirectHome) {
+              return <Redirect to='./' />
+            }
+          }
 
 
     render() {
@@ -39,7 +52,7 @@ class Logintoregister extends Component {
             <div className="App">
                 <img src= {logo} className="userr"></img>
                 <div className="sidebar">
-                    <a href="#home">صفحه اصلی</a>
+                    <a href="#home" onClick={this.setRedirectHome}>{this.renderRedirectHome()}صفحه اصلی</a>
                     <a href="#news">اخبار</a>
                     <a href="#contact">تماس با ما</a>
                     <a href="#about">درباره سایت</a>

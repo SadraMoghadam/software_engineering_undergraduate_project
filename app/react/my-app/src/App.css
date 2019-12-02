@@ -2,12 +2,13 @@
   text-align: center;
 }
 
-body, html{
+body{
   background-image: url(uni.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  min-height:100%;
   padding: 0;
   margin: 0;
 }
@@ -503,6 +504,7 @@ transform: translate(50%,-100%);
     padding: 12px 20px 12px 40px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
+    position: relative;
 }
 
 .searchBar input[type=text]:focus {

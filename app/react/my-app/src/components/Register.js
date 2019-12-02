@@ -1,17 +1,32 @@
 
 import React, {Component} from 'react';
 import logo from '../ostadrate.png';
-
+import { Redirect } from 'react-router-dom';
 import '../App.css';
 
 class Register extends Component {
-  
+  state = {
+    redirectHome: false
+  }
+
+  setRedirectHome = () => {
+    this.setState({
+      redirectHome: true
+    })
+  }
+
+  renderRedirectHome = () => {
+    if (this.state.redirectHome) {
+      return <Redirect to='./' />
+    }
+  }
+
   render() {
     return (
     <div className="App">
        <img src= {logo} className="userr"></img>
 <div className="sidebar">
-  <a href="#home">صفحه اصلی</a>
+<a href="#home" onClick={this.setRedirectHome}>{this.renderRedirectHome()}صفحه اصلی</a>
   <a href="#news">اخبار</a>
   <a href="#contact">تماس با ما</a>
   <a href="#about">درباره سایت</a>

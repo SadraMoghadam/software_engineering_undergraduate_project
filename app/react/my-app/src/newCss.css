@@ -1,0 +1,39 @@
+.header {
+    background: #264e86;
+    position: relative;
+    height: 200px;
+    text-align: center;
+    z-index: 10;
+  }
+
+  body {
+    background-color: aliceblue;
+  }
+  
+  .image{
+    margin-top: -40px;
+    margin-left: 100px;
+    position: relative;
+  }
+
+  .allBackground{
+    min-height: 100% !important;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: aliceblue;
+    position: fixed;
+  }
+
+  .loginRegButton {
+    position: relative;
+    float: right;
+    margin: 10px;
+    background-color: aliceblue;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .loginRegButton:hover {
+    background-color: #7F9EDC;
+  }
