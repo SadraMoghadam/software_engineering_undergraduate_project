@@ -4,14 +4,25 @@ import React, {Component} from 'react';
 import '../App.css';
 import Register from './Register';
 import Logintoregister from './Logintoregister';
+import { Redirect } from 'react-router-dom'
 
 
 class Login extends Component {
-   ClickButton =() => {
-    return(
-        <Logintoregister/>
-    )
-}
+  state = {
+    redirect: false
+  } 
+
+    setRedirect = () => {
+      this.setState({
+        redirect: true
+      })
+    }
+    renderRedirect = () => {
+      if (this.state.redirect) {
+        return <Redirect to='/Logintoregister' />
+      }
+    }
+
 
 
   render() {
@@ -39,7 +50,10 @@ class Login extends Component {
           <input type="submit" name="" value="ورود"></input>
         </form>
     </div>
-        <button className="button" onClick={this.ClickButton}><span>ثبت نام</span></button>
+    <div>
+        {this.renderRedirect()}
+        <button className="button" onClick={this.setRedirect}><span>ثبت نام</span></button>
+    </div>
         </div>
     );
   }
