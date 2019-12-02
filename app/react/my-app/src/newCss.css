@@ -17,12 +17,16 @@
   }
 
   .allBackground{
-    min-height: 100% !important;
+    position: relative;
+    height: 100% !important;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
     background-color: aliceblue;
+    overflow-y: auto;
     position: fixed;
+    z-index: -1;
+    text-align: right;
   }
 
   .loginRegButton {
@@ -32,8 +36,60 @@
     background-color: aliceblue;
     padding: 10px;
     cursor: pointer;
+    border-radius: 5px;
   }
 
   .loginRegButton:hover {
     background-color: #7F9EDC;
+  }
+
+  .rateButton {
+    background-color: #7F9EDC;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 30%;
+    text-align: center;
+    margin: 40px auto;
+    position: relative;
+    top: 200px;
+  }
+
+  .rateButton:hover {
+    background-color: #264e86;
+  }
+
+  .infoPart {
+    margin-top: 100px;
+    text-align: center;
+  }
+
+  .ratePart {
+    height: 900px;
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+    width: 50%;
+    overflow-y: auto;
+    background-color: #7F9EDC;
+  }
+
+  table {
+    margin: auto;
+  }
+  
+  td {
+    padding: 20px;
+  }
+
+  .submit {
+    border: none;
+    outline: none;
+    height:  45px;
+    width: 150px;
+    color: #fff;
+    font-size: 16px;
+    background: #151A3F;
+    cursor: pointer;
+    border-radius: 20px;
   }
