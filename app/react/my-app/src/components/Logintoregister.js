@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import logo from '../ostadrate.png';
-
 import '../App.css';
 
 class Logintoregister extends Component {
