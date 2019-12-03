@@ -2,12 +2,13 @@
   text-align: center;
 }
 
-body, html{
+body{
   background-image: url(uni.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  min-height:100%;
   padding: 0;
   margin: 0;
 }
@@ -297,8 +298,7 @@ body, html{
 }
 
 .buttonStudent{
-transform: translate(50%,-100%);
-  margin: 0;
+  margin-bottom: 50px;
   display: inline-block;
   border-radius: 40px;
   background-color: #151A3F;
@@ -343,7 +343,6 @@ transform: translate(50%,-100%);
 
 
 .buttonOstad{
-  transform: translate(-50%,20%);
   margin: 0;
   display: inline-block;
   border-radius: 40px;
@@ -503,6 +502,7 @@ transform: translate(50%,-100%);
     padding: 12px 20px 12px 40px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
+    position: relative;
 }
 
 .searchBar input[type=text]:focus {
@@ -541,7 +541,6 @@ transform: translate(50%,-100%);
     width: 225px;
     height: 225px;
     border-radius: 50%;
-    overflow: hidden;
     position: absolute;
     top: calc(-100px/120);
     left: calc(40% - 50px);
@@ -553,7 +552,6 @@ transform: translate(50%,-100%);
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    overflow: hidden;
     position: absolute;
    transform: translate(-50%,0%);
 }
