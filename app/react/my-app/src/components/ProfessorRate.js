@@ -4,6 +4,7 @@ import '../newCss.css';
 import Header from './Header';
 import { Redirect } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
+
  
 //var jsonData = require('../../file.json');
 
@@ -43,36 +44,36 @@ class ProfessorRate extends React.Component {
   onStarClickOverall(nextValue, prevValue, name) {
     this.setState({overall_score: nextValue});
   }
-  onStarClickFood(nextValue, prevValue, name) {
-    this.setState({food_rate: nextValue});
+  onStarClickQuality(nextValue, prevValue, name) {
+    this.setState({quality: nextValue});
   }
-  onStarClickSequrity(nextValue, prevValue, name) {
-    this.setState({sequrity_rate: nextValue});
+  onStarClickDifficulty(nextValue, prevValue, name) {
+    this.setState({difficulty: nextValue});
   }
-  onStarClickLocation(nextValue, prevValue, name) {
-    this.setState({location_rate: nextValue});
+  onStarClickGradeRate(nextValue, prevValue, name) {
+    this.setState({grade_rate: nextValue});
   }
-  onStarClickInternet(nextValue, prevValue, name) {
-    this.setState({internet_rate: nextValue});
+  toggleChangeNotebook = () => {
+    this.setState({notebook: !this.notebook})
   }
-  onStarClickFacility(nextValue, prevValue, name) {
-    this.setState({facility_rate: nextValue});
+  toggleChangeAttendance = () => {
+    this.setState({attendance: !this.attendance})
   }
  
   render() {
     const { overall_score } = this.state;
-    const { quality: food_rate } = this.state;
-    const { grade_rate: sequrity_rate } = this.state;
-    const { location_rate } = this.state;
-    const { internet_rate } = this.state;
-    const { facility_rate } = this.state;
+    const { quality } = this.state;
+    const { grade_rate} = this.state;
+    const { difficulty } = this.state;
+    const { notebook } = this.state;
+    const { attendance } = this.state;
     const jsonData = {
       id: 1,
-      university: "علم و صنعت",
-      likes: "6",
+      university: "مینایی",
+      likes: "10",
       dislikes: "3",
       date: "۱۳۹۸/۵/۲۲",
-      score: "۶.۸",
+      score: "۸.۸",
     }
     
     return (                
@@ -80,7 +81,7 @@ class ProfessorRate extends React.Component {
         <Header/> 
         <div className="allBackground">
             <div className="infoPart">
-                <h1>دانشگاه {jsonData.university}</h1>
+                <h1>استاد {jsonData.university}</h1>
                 <h2>امتیاز کل {jsonData.score}</h2>
             </div>
             <div className="ratePart">
@@ -97,41 +98,39 @@ class ProfessorRate extends React.Component {
                         <td><StarRatingComponent 
                           name="rate2" 
                           starCount={10}
-                          value={food_rate}
-                          onStarClick={this.onStarClickFood.bind(this)}/></td>
-                        <td><p>کیفیت غذا : {food_rate}</p></td>
+                          value={quality}
+                          onStarClick={this.onStarClickQuality.bind(this)}/></td>
+                        <td><p>کیفیت تدریس : {quality}</p></td>
                     </tr>
                     <tr className="row">
                         <td><StarRatingComponent 
                           name="rate3" 
                           starCount={10}
-                          value={sequrity_rate}
-                          onStarClick={this.onStarClickSequrity.bind(this)}/></td>
-                        <td><p>امنیت : {sequrity_rate}</p></td>
+                          value={difficulty}
+                          onStarClick={this.onStarClickDifficulty.bind(this)}/></td>
+                        <td><p>میزان سختگیری : {difficulty}</p></td>
                     </tr>
                     <tr className="row">
                         <td><StarRatingComponent 
                           name="rate4" 
                           starCount={10}
-                          value={location_rate}
-                          onStarClick={this.onStarClickLocation.bind(this)}/></td>
-                        <td><p>دسترسی وسایل نقلیه عمومی(محل دانشگاه) : {location_rate}</p></td>
+                          value={grade_rate}
+                          onStarClick={this.onStarClickGradeRate.bind(this)}/></td>
+                        <td><p>کیفیت نمره دهی : {grade_rate}</p></td>
                     </tr>
                     <tr className="row">
-                        <td><StarRatingComponent 
-                          name="rate5" 
-                          starCount={10}
-                          value={internet_rate}
-                          onStarClick={this.onStarClickInternet.bind(this)}/></td>
-                        <td><p>کیفیت اینترنت : {internet_rate}</p></td>
+                        <td><input type="checkbox"
+                          checked={this.state.notebook}
+                          onChange={this.toggleChangeNotebook.bind(this)}
+                        /></td>
+                        <td><p>دفتر : {notebook ? 'دارد' : 'ندارد'}</p></td>
                     </tr>
                     <tr className="row">
-                        <td><StarRatingComponent 
-                          name="rate6" 
-                          starCount={10}
-                          value={facility_rate}
-                          onStarClick={this.onStarClickFacility.bind(this)}/></td>
-                        <td><p>امکانات : {facility_rate}</p></td>
+                        <td><input type="checkbox"
+                          checked={this.state.attendance}
+                          onChange={this.toggleChangeAttendance.bind(this)}
+                        /></td>
+                        <td><p>حضور و غیاب : {attendance ? 'دارد' : 'ندارد'}</p></td>
                     </tr>
                     
                 </table>

@@ -298,8 +298,7 @@ body{
 }
 
 .buttonStudent{
-transform: translate(50%,-100%);
-  margin: 0;
+  margin-bottom: 50px;
   display: inline-block;
   border-radius: 40px;
   background-color: #151A3F;
@@ -344,7 +343,6 @@ transform: translate(50%,-100%);
 
 
 .buttonOstad{
-  transform: translate(-50%,20%);
   margin: 0;
   display: inline-block;
   border-radius: 40px;

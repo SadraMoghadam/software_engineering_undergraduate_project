@@ -93,3 +93,57 @@
     cursor: pointer;
     border-radius: 20px;
   }
+
+  .submit:hover {
+    background: #168d0c;
+    color: #fff;
+  }
+
+  .homeButton {
+      background-color: aliceblue;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+      text-align: center;
+      width: 10%;
+      margin: 40px auto;
+      position: absolute;
+      top: 115px;
+  }
+
+  .homeButton:hover {
+    background-color: #7F9EDC;
+}
+.contactButton {
+  background-color: aliceblue;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  width: 10%;
+  margin: 40px auto;
+  position: absolute;
+  left: 11.5%;
+  top: 115px;
+}
+
+.contactButton:hover {
+background-color: #7F9EDC;
+}
+
+.aboutButton {
+  background-color: aliceblue;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  width: 10%;
+  margin: 40px auto;
+  position: absolute;
+  left: 23%;
+  top: 115px;
+}
+
+.aboutButton:hover {
+background-color: #7F9EDC;
+}

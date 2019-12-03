@@ -8,7 +8,8 @@ class Home extends Component {
 
     state = {
         redirectProfessorRate: false,
-        redirectUniRate: false
+        redirectUniRate: false,
+        
       } 
     
         setRedirectProfessorRate = () => {

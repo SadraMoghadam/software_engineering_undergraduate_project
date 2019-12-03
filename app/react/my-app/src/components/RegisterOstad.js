@@ -27,8 +27,7 @@ class RegisterOstad extends Component {
     <div className="App">
       <img src= {logo} className="userr"></img>
       <div className="sidebar">
-      <a href="#home" onClick={this.setRedirectHome}>{this.renderRedirectHome()}صفحه اصلی</a>
-        <a href="#news">اخبار</a>
+        <a href="#home" onClick={this.setRedirectHome}>{this.renderRedirectHome()}صفحه اصلی</a>
         <a href="#contact">تماس با ما</a>
         <a href="#about">درباره سایت</a>
       </div>

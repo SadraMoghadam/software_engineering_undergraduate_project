@@ -7,7 +7,8 @@ import { Redirect } from 'react-router-dom';
 
 class Header extends Component {
     state = {
-        redirectLoginReg: false
+        redirectLoginReg: false,
+        redirectHome: false
       } 
     
         setRedirectLoginReg = () => {
@@ -22,6 +23,18 @@ class Header extends Component {
           }
         }
 
+        setRedirectHome = () => {
+            this.setState({
+              redirectHome: true
+            })
+          }
+  
+          renderRedirectHome = () => {
+            if (this.state.redirectHome) {
+              return <Redirect to='./' />
+            }
+          }
+
 
     render() {
         return(
@@ -30,6 +43,16 @@ class Header extends Component {
             <div className="loginRegButton" onClick={this.setRedirectLoginReg}>
             {this.renderRedirectLoginReg()}
                 ورود / ثبت نام
+            </div>
+            <div className="homeButton" onClick={this.setRedirectHome}>
+            {this.renderRedirectHome()}
+                صفحه اصلی      
+            </div>
+            <div className="contactButton">
+                تماس با ما       
+            </div>
+            <div className="aboutButton">
+                درباره سایت    
             </div>
             <form className="searchBar">
                 <input type = "text" name = "search" placeholder = "استاد یا دانشگاه مورد نظر خود را جستجو کنید"></input>
