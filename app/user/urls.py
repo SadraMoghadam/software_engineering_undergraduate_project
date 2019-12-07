@@ -9,6 +9,7 @@ urlpatterns = [
     path('login-user/', login_user, name='login_user'),
     path('login-professor/', login_professor, name='login_professor'),
     path('register-professor/', register_professor, name='register_professor'),
+    path('register-user/', register_user, name='register_user'),
     path('get-professors/', get_professors, name='get_professors'),
     path('get-top-professors/', get_top_professors, name='get_top_professors'),
     path('get-courses/<int:professor_id>/', get_courses, name='get_courses'),

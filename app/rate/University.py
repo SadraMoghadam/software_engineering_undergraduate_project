@@ -57,6 +57,9 @@ def submit_rate(request):
         data = request.POST
         university_id = data.get('university_id')  # or url ?
         university = get_object_or_404(University, pk=university_id)
+        rate_once_before = UniversityRate.objects.filter(user_id=user.username)
+        if rate_once_before:
+            return JsonResponse({"detail": "User rated once before !"})
         comment = data.get('comment')
         food = data.get('food')
         security = data.get('security')

@@ -19,8 +19,10 @@ def login_professor(request):
     if user:
         if user.is_professor and user.is_active:
             _login(request, user)
-        if user.is_authenticated:
-            return JsonResponse({'result': True})
+    
+    if user.is_authenticated:
+        return JsonResponse({'result': True})
+    
     return JsonResponse({'result': False})
 
 
@@ -85,8 +87,6 @@ def get_courses(request, professor_id):
 @login_required
 @api_view(['POST'])
 def add_course(request, professor_id):
-    # users can not do this
-    # Issue CSRF Missing
     user = request.user
     if user.is_active and user.is_professor:
         data = request.POST
@@ -118,6 +118,9 @@ def submit_rate(request):
     if (not user.is_professor) and user.is_active:
         data = request.POST
         professor_id = data.get('professor_id')  # or url ?
+        rate_once_before = ProfessorRate.objects.filter(user_id=user.username)
+        if rate_once_before:
+            return JsonResponse({"detail": "User rated once before !"})
         professor = get_object_or_404(CustomUser, username=professor_id)
         comment = data.get('comment')
         difficaullty = data.get('difficaullty')
