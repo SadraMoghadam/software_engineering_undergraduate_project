@@ -5,7 +5,7 @@ from django.contrib.auth import login as _login
 from django.contrib.auth.decorators import login_required
 
 from .models import CustomUser
-from rate.models import Course, ProfessorRate
+from rate.models import Course, ProfessorRate, Tag
 
 from rest_framework.decorators import api_view
 
@@ -118,7 +118,9 @@ def submit_rate(request):
     if (not user.is_professor) and user.is_active:
         data = request.POST
         professor_id = data.get('professor_id')  # or url ?
-        rate_once_before = ProfessorRate.objects.filter(user_id=user.username)
+        rate_once_before = ProfessorRate.objects.filter(
+            user_id=user.username,
+            professor_id=professor_id)
         if rate_once_before:
             return JsonResponse({"detail": "User rated once before !"})
         professor = get_object_or_404(CustomUser, username=professor_id)
@@ -128,9 +130,13 @@ def submit_rate(request):
         grade_rate = data.get('grade_rate')
         notebook = data.get('notebook')
         attendance = data.get('attendance')
-        # tags ??
+        tag_names =  data.get('tags').split(',')
+        tags = []
+        for tag_name in tag_names:
+            tag_name = tag_name.strip()
+            tags.append(Tag.objects.get_or_create(tag_name))
 
-        ProfessorRate.objects.create(
+        professor_rate = ProfessorRate.objects.create(
             user=user,
             professor=professor,
             comment=comment,
@@ -138,9 +144,10 @@ def submit_rate(request):
             quality=quality,
             grade_rate=grade_rate,
             notebook=bool(notebook),
-            attendance=bool(attendance),
-            # Tags ?
-        )
+            attendance=bool(attendance),)
+        
+        for tag in tags:
+            professor_rate.tags.add(tag)
 
         return JsonResponse({'result': True})
     return JsonResponse({'detail': 'Authentication not failed'})

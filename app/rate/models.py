@@ -2,8 +2,21 @@ from django.db import models
 from user.models import CustomUser
 
 
+class TagManager(models.Manager):
+    def get_or_create(self, name):
+        tag = None
+        try:
+            tag = self.get(name=name)
+            return tag
+        except:
+            tag = self.create(name=name)
+            return tag
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=120)
+
+    objects = TagManager()
 
     def __str__(self):
         return self.name
