@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from user.models import CustomUser
 
 
@@ -88,6 +90,7 @@ class ProfessorRate(models.Model):
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
     comment = models.TextField(blank=True, null=True)
+    total_score = models.IntegerField(default=1)
     difficaullty = models.IntegerField(default=0)
     quality = models.IntegerField(default=0)
     grade_rate = models.IntegerField(default=0)
@@ -123,6 +126,7 @@ class UniversityRate(models.Model):
         decimal_places=1,
         default=0.0
         )
+    total_score = models.IntegerField(default=0)
     food_rate = models.IntegerField(default=0)
     security_rate = models.IntegerField(default=0)
     location_rate = models.IntegerField(default=0)
@@ -131,3 +135,20 @@ class UniversityRate(models.Model):
 
     def __str__(self):
         return "User: {} --> University: {}".format(self.user, self.university)
+
+
+# Signals
+def caculate_professor_overall_score(sender, instance, *args, **kwargs):
+    sum_ = instance.total_score + instance.difficaullty +\
+         instance.quality + instance.grade_rate
+    instance.overall_score = sum_ / 4
+
+
+def caculate_university_overall_score(sender, instance, *args, **kwargs):
+    sum_ = instance.total_score + instance.food_rate + instance.security_rate +\
+        instance.location_rate + instance.facility_rate + instance.internet_rate
+    instance.overall_score = sum_ / 6
+
+
+pre_save.connect(caculate_university_overall_score, sender=UniversityRate)
+pre_save.connect(caculate_professor_overall_score, sender=ProfessorRate)
