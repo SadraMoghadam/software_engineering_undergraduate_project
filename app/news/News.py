@@ -1,28 +1,35 @@
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from rest_framework.decorators import api_view
+from rest_framework.parsers import JSONParser
 
-from .models import News
+from news.models import News
+from news.serializers import NewsSerializer
 
 
-@api_view(['GET'])
+@csrf_exempt
 def get_news(request):
-    news = News.objects.all().values()
-    return JsonResponse({"result": list(news)})
+    """
+    List all news
+    """
+    if request.method == 'GET':
+        news = News.objects.all()
+        serializer = NewsSerializer(news, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
-@api_view(['GET'])
+@csrf_exempt
 def get_news_detail(request, news_id):
-    news = None
-    news = get_object_or_404(News, pk=news_id)
-    result = {
-        "title": news.title,
-        "context": news.context,
-        "timestamp": news.timestamp
-    }
+    """
+    Get one news with id
+    """
+    try:
+        news = News.objects.get(id=news_id)
+    except News.DoesNotExist:
+        return HttpResponse(status=404)
+    
 
-    if news.image:
-        result["image"] = news.image.url
-
-    return JsonResponse(result)
+    if request.method == 'GET':
+        serializer = NewsSerializer(news)
+        return JsonResponse(serializer.data, safe=False)
