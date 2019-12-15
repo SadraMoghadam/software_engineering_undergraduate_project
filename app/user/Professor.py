@@ -19,10 +19,10 @@ def login_professor(request):
     if user:
         if user.is_professor and user.is_active:
             _login(request, user)
-    
+
     if user.is_authenticated:
         return JsonResponse({'result': True})
-    
+
     return JsonResponse({'result': False})
 
 
@@ -50,7 +50,9 @@ def register_professor(request):
 def get_professors(request):
     professors = CustomUser.objects.filter(
         is_professor=True, is_active=True
-        ).values('username', 'email', 'first_name', 'last_name', 'profile_photo')
+        ).values(
+            'username', 'email', 'first_name', 'last_name', 'profile_photo'
+            )
     return JsonResponse({'result': list(professors)})
 
 
@@ -97,7 +99,7 @@ def add_course(request, professor_id):
     else:
         return JsonResponse(
                 {
-                'detail': 'User is not active or he/she is not a professor',
+                    'detail': 'User is not authenticated',
                 }
             )
     return JsonResponse({'detail': 'user is not authenticated'})
@@ -130,7 +132,7 @@ def submit_rate(request):
         grade_rate = data.get('grade_rate')
         notebook = data.get('notebook')
         attendance = data.get('attendance')
-        tag_names =  data.get('tags').split(',')
+        tag_names = data.get('tags').split(',')
         tags = []
         for tag_name in tag_names:
             tag_name = tag_name.strip()
@@ -145,7 +147,7 @@ def submit_rate(request):
             grade_rate=grade_rate,
             notebook=bool(notebook),
             attendance=bool(attendance),)
-        
+
         for tag in tags:
             professor_rate.tags.add(tag)
 

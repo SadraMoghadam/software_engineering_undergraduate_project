@@ -1,9 +1,6 @@
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
-
 from news.models import News
 from news.serializers import NewsSerializer
 
@@ -28,7 +25,6 @@ def get_news_detail(request, news_id):
         news = News.objects.get(id=news_id)
     except News.DoesNotExist:
         return HttpResponse(status=404)
-    
 
     if request.method == 'GET':
         serializer = NewsSerializer(news)

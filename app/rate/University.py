@@ -1,81 +1,93 @@
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
-from rest_framework.decorators import api_view
+from rest_framework.parsers import JSONParser
 
-from .models import *
+from .models import University, UniversityRate, Department
+from .serializers import UniversitySerializer, UniversityRateSerializer,\
+    DepartmentSerializer
 
 
-@api_view(['GET'])
+@csrf_exempt
 def get_universities(request):
-    universities = University.objects.all().values()
-    return JsonResponse({'results': list(universities)})
+    """
+    List all universities
+    """
+    if request.method == 'GET':
+        universities = University.objects.all()
+        serializer = UniversitySerializer(universities, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
-@api_view(['GET'])
+@csrf_exempt
 def get_top_universities(request):
-    top_rates = UniversityRate.objects.all().order_by('-overall_score').values('university')
-    top_universities = []
-
-    for rate in top_rates:
-        university = University.objects.get(id=rate['university'])
-        json = {
-                'id': university.id,
-                'name': university.name,
-                'location': university.location.stringLocation,
-            }
-        if university.image:
-            json['image'] = university.image.url
-        else:
-            json['image'] = None
-        top_universities.append(
-            json
-        )
-    return JsonResponse({'result': top_universities})
+    """
+    List top universities order by overall_score
+    """
+    if request.method == 'GET':
+        top_rates = UniversityRate.objects.all().order_by('-overall_score')
+        top_universities = University.objects.filter(
+            id__in=[rate.university.id for rate in top_rates]
+            )
+        serializer = UniversitySerializer(top_universities, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
-@api_view(['GET'])
+@csrf_exempt
 def get_rates(request, university_id):
-    university = get_object_or_404(University, pk=university_id)
-    rates = UniversityRate.objects.filter(university=university).values()
-    return JsonResponse({'results': list(rates)})
+    """
+    Get university rates by its id,
+    or create a new one
+    """
+    try:
+        university = University.objects.get(id=university_id)
+    except University.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        rates = UniversityRate.objects.filter(university=university)
+        serializer = UniversityRateSerializer(rates, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        user = request.user
+        if user.is_authenticated and \
+                user.is_active and \
+                (not user.is_professor):
+            data = JSONParser().parse(request)
+            data['university'] = university.id
+            data['user'] = user.username
+            serializer = UniversityRateSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data, status=201)
+            return JsonResponse(serializer.errors, status=400)
+        else:
+            return JsonResponse(
+                    {'errors': ['User is not authenticated'], },
+                    status=403
+                    )
 
 
-@api_view(['GET'])
+@csrf_exempt
 def get_departments(request, university_id):
-    university = get_object_or_404(University, pk=university_id)
-    departments = Department.objects.filter(university=university).values()
-    return JsonResponse({'results': list(departments)})
+    """
+    Get university departments by its id,
+    or create a new one
+    """
+    try:
+        university = University.objects.get(id=university_id)
+    except University.DoesNotExist:
+        return HttpResponse(status=404)
 
-
-@login_required
-@api_view(['POST'])
-def submit_rate(request):
-    user = request.user
-    if (not user.is_professor) and user.is_active:
-        data = request.POST
-        university_id = data.get('university_id')  # or url ?
-        university = get_object_or_404(University, pk=university_id)
-        rate_once_before = UniversityRate.objects.filter(user_id=user.username)
-        if rate_once_before:
-            return JsonResponse({"detail": "User rated once before !"})
-        comment = data.get('comment')
-        food = data.get('food')
-        security = data.get('security')
-        location = data.get('location')
-        facility = data.get('facility')
-        internet = data.get('internet')
-
-        UniversityRate.objects.create(
-            university=university,
-            user=user,
-            comment=comment,
-            food_rate=food,
-            security_rate=security,
-            location_rate=location,
-            facility_rate=facility,
-            internet_rate=internet
-        )
-        return JsonResponse({'result': True})
-    return JsonResponse({'result': 'Authentication failed.'})
+    if request.method == 'GET':
+        departments = Department.objects.filter(university=university)
+        serializer = DepartmentSerializer(departments, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        data['university'] = university.id
+        serializer = DepartmentSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)

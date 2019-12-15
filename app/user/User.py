@@ -1,13 +1,17 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as _login
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .models import CustomUser
+
+from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
 
+from .models import CustomUser
 
-@api_view(['POST'])
+
+@csrf_exempt
 def login_user(request):
-    data = request.POST
+    data = JSONParser().parse(request)
     username = int(data.get('username'))
     password = data.get('password')
     user = authenticate(username=username, password=password)

@@ -1,6 +1,5 @@
 from django.db import models
 from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from user.models import CustomUser
 
 
@@ -10,7 +9,7 @@ class TagManager(models.Manager):
         try:
             tag = self.get(name=name)
             return tag
-        except:
+        except Tag.DoesNotExist:
             tag = self.create(name=name)
             return tag
 
@@ -145,8 +144,9 @@ def caculate_professor_overall_score(sender, instance, *args, **kwargs):
 
 
 def caculate_university_overall_score(sender, instance, *args, **kwargs):
-    sum_ = instance.total_score + instance.food_rate + instance.security_rate +\
-        instance.location_rate + instance.facility_rate + instance.internet_rate
+    sum_ = instance.total_score + instance.food_rate +\
+            instance.security_rate + instance.location_rate +\
+            instance.facility_rate + instance.internet_rate
     instance.overall_score = sum_ / 6
 
 
