@@ -8,6 +8,7 @@ import ProfessorRate from './components/ProfessorRate';
 import UniversityRate from './components/UniversityRate';
 import './App.css';
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
+import CommentForm from './components/Layout/Comment';
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/RegisterOstad" component={RegisterOstad}/>
         <Route exact path="/ProfessorRate" component={ProfessorRate}/>
         <Route exact path="/UniversityRate" component={UniversityRate}/>
+        <Route exact path="/Comment" component={CommentForm}/>
       </Switch>
     </Router>
     

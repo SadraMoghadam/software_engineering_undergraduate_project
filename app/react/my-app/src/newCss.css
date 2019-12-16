@@ -3,11 +3,7 @@
     position: relative;
     height: 200px;
     text-align: center;
-    z-index: 10;
-  }
-
-  body {
-    background-color: aliceblue;
+    z-index: 5;
   }
   
   .image{
@@ -22,11 +18,12 @@
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
-    background-color: aliceblue;
+    background-color: rgba(240, 248, 255, 0.9);
     overflow-y: auto;
     position: fixed;
     z-index: -1;
     text-align: right;
+    border-radius: 20px;
   }
 
   .loginRegButton {
@@ -68,6 +65,7 @@
     height: 900px;
     position: relative;
     text-align: center;
+    border-radius: 20px;
     margin: 0 auto;
     width: 50%;
     overflow-y: auto;
@@ -100,30 +98,32 @@
   }
 
   .homeButton {
-      background-color: aliceblue;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 5px;
-      text-align: center;
-      width: 10%;
-      margin: 40px auto;
-      position: absolute;
-      top: 115px;
+    color: aliceblue;
+    background-image: url('images/home2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    width: 20px;
+    height: 22px;
+    margin: 10px auto;
+    position: absolute;
+    top: 0px;
+    right: 140px;
   }
 
-  .homeButton:hover {
-    background-color: #7F9EDC;
-}
 .contactButton {
   background-color: aliceblue;
   padding: 10px;
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
-  width: 10%;
+  width: 8%;
   margin: 40px auto;
   position: absolute;
-  left: 11.5%;
   top: 115px;
 }
 
@@ -137,13 +137,33 @@ background-color: #7F9EDC;
   cursor: pointer;
   border-radius: 5px;
   text-align: center;
-  width: 10%;
+  width: 8%;
   margin: 40px auto;
   position: absolute;
-  left: 23%;
+  left: 10%;
   top: 115px;
 }
 
 .aboutButton:hover {
 background-color: #7F9EDC;
+}
+
+.newsItem{
+  background: #7F9EDC;
+  margin-top: 30px;
+  margin-left: 80px;
+  margin-right: 80px;
+  height: 150px;
+  border: 1px #ccc dotted;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.newsItem:hover{
+  background-color: #264e86;
+}
+
+a{
+  color: black;
+  text-decoration: none;
 }

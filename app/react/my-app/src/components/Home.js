@@ -2,53 +2,35 @@
 import React, {Component} from 'react';
 import '../newCss.css';
 import Header from './Header';
-import { Redirect } from 'react-router-dom';
+import News from './Layout/News';
 
 class Home extends Component {
 
-    state = {
-        redirectProfessorRate: false,
-        redirectUniRate: false,
-        
-      } 
-    
-        setRedirectProfessorRate = () => {
-          this.setState({
-            redirectProfessorRate: true
-          })
-        }
-
-        renderRedirectProfessorRate = () => {
-          if (this.state.redirectProfessorRate) {
-            return <Redirect to='./ProfessorRate' />
-          }
-        }
-
-        setRedirectUniRate = () => {
-            this.setState({
-              redirectUniRate: true
-            })
-          }
-  
-          renderRedirectUniRate = () => {
-            if (this.state.redirectUniRate) {
-              return <Redirect to='./UniversityRate' />
-            }
-          }
-
+  state = {
+    newsList: [
+      {
+        id: 1,
+        title: "بررسی لغو امتیاز فرزندان اساتید توسط شورای انقلاب فرهنگی",
+        url: "https://www.unp.ir/news/university/university-news/89015"
+      },
+      {
+        id: 2,
+        title: "سامانه پیشخوان ارائه خدمات آموزشی در وزارت بهداشت راه اندازی می شود",
+        url: "https://www.unp.ir/news/university/university-news/89014"
+      },
+      {
+        id: 3,
+        title: "از پایان‌نامه‌های تحصیلات تکمیلی با موضوع مدیریت سبز حمایت مالی می شود",
+        url: "https://www.unp.ir/news/university/university-news/89013"
+      }
+    ]
+  }
     render() {
         return(
             <div className="Home">
                 <Header/>
                 <div className="allBackground">
-                <div className="rateButton" onClick={this.setRedirectProfessorRate}>
-                    {this.renderRedirectProfessorRate()}
-                    امتیازدهی استاد
-                </div>
-                <div className="rateButton" onClick={this.setRedirectUniRate}>
-                    {this.renderRedirectUniRate()}
-                    امتیازدهی دانشگاه
-                </div>
+                  <News newsList={this.state.newsList}/>
                 </div>
             </div>
             
