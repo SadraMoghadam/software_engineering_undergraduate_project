@@ -41,17 +41,8 @@ urlpatterns = [
         Professor.get_courses,
         name='get_courses'),
     path(
-        'add-course/<int:professor_id>/',
-        Professor.add_course,
-        name='add_course'),
-    path(
         'get-rates/<int:professor_id>/',
         Professor.get_rates,
         name='get_rates'
-        ),
-    path(
-        'submit-your-rate/',
-        Professor.submit_rate,
-        name='submit_rate'
         ),
 ]

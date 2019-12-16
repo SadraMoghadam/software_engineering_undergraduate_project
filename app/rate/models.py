@@ -105,7 +105,6 @@ class ProfessorRate(models.Model):
         Tag,
         related_name='tags',
         related_query_name='tags',
-        null=True,
         blank=True
         )
 

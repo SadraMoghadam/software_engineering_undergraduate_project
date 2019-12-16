@@ -5,12 +5,14 @@ from django.http import JsonResponse
 
 from rest_framework.parsers import JSONParser
 
-from user.models import CustomUser
 from user.serializers import CustomUserSerializer
 
 
 @csrf_exempt
 def login_user(request):
+    """
+    Login user with username and password
+    """
     if request.method == 'POST':
         data = JSONParser().parse(request)
         username = int(data.get('username'))
@@ -27,6 +29,9 @@ def login_user(request):
 
 @csrf_exempt
 def register_user(request):
+    """
+    register user
+    """
     if request.method == 'POST':
         data = JSONParser().parse(request)
         data['is_professor'] = False

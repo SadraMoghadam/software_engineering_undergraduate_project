@@ -43,6 +43,12 @@ class ProfessorRateSerializer(serializers.ModelSerializer):
             'comment', 'total_score', 'difficaullty', 'quality',
             'grade_rate', 'notebook', 'attendance', 'tags'
             ]
+        validators = [
+            UniqueTogetherValidator(
+                queryset=ProfessorRate.objects.all(),
+                fields=['user', 'professor']
+            )
+        ]
 
 
 class UniversityRateSerializer(serializers.ModelSerializer):
