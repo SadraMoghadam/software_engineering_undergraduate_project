@@ -148,3 +148,22 @@ background-color: #7F9EDC;
 background-color: #7F9EDC;
 }
 
+.newsItem{
+  background: #7F9EDC;
+  margin-top: 30px;
+  margin-left: 80px;
+  margin-right: 80px;
+  height: 150px;
+  border: 1px #ccc dotted;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.newsItem:hover{
+  background-color: #264e86;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
