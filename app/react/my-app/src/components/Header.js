@@ -1,4 +1,4 @@
-import logo from '../ostadrate.png';
+import logo from '../images/ostadrate.png';
 import React, {Component} from 'react';
 import '../newCss.css';
 import '../App.css'
@@ -45,8 +45,7 @@ class Header extends Component {
                 ورود / ثبت نام
             </div>
             <div className="homeButton" onClick={this.setRedirectHome}>
-            {this.renderRedirectHome()}
-                صفحه اصلی      
+            {this.renderRedirectHome()}   
             </div>
             <div className="contactButton">
                 تماس با ما       

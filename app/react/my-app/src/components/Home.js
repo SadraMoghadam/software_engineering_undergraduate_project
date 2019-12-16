@@ -41,14 +41,9 @@ class Home extends Component {
             <div className="Home">
                 <Header/>
                 <div className="allBackground">
-                <div className="rateButton" onClick={this.setRedirectProfessorRate}>
-                    {this.renderRedirectProfessorRate()}
-                    امتیازدهی استاد
-                </div>
-                <div className="rateButton" onClick={this.setRedirectUniRate}>
-                    {this.renderRedirectUniRate()}
-                    امتیازدهی دانشگاه
-                </div>
+                  <div className="news">
+                    
+                  </div>
                 </div>
             </div>
             

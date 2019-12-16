@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import logo from '../ostadrate.png';
+import logo from '../images/ostadrate.png';
 import { Redirect } from 'react-router-dom';
 import '../App.css';
 

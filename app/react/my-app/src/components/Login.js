@@ -1,5 +1,5 @@
 
-import logo from '../ostadrate.png';
+import logo from '../images/ostadrate.png';
 import React, {Component} from 'react';
 import '../App.css';
 import Register from './Register';
