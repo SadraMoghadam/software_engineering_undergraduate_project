@@ -1,68 +1,60 @@
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as _login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
-from .models import CustomUser
+from rest_framework.parsers import JSONParser
+
 from rate.models import Course, ProfessorRate, Tag
+from user.serializers import CustomUserSerializer
 
-from rest_framework.decorators import api_view
 
-
-@api_view(['POST'])
+@csrf_exempt
 def login_professor(request):
-    data = request.POST
-    username = int(data.get('username'))
-    password = data.get('password')
-    user = authenticate(username=username, password=password)
-    if user:
-        if user.is_professor and user.is_active:
-            _login(request, user)
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        username = int(data.get('username'))
+        password = data.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_professor and user.is_active:
+                _login(request, user)
 
-    if user.is_authenticated:
-        return JsonResponse({'result': True})
+        if user.is_authenticated:
+            return JsonResponse({'result': True})
 
-    return JsonResponse({'result': False})
-
-
-@api_view(['POST'])
-def register_professor(request):
-    data = request.POST
-    first_name = data.get('first_name')
-    last_name = data.get('last_name')
-    email = data.get('email')
-    username = int(data.get('username'))
-    password = data.get('password')
-
-    user = CustomUser.objects.create_user(
-        username=username, email=email, password=password,
-        first_name=first_name, last_name=last_name, is_professor=True)
-
-    if user:
-        user.save()
-        return JsonResponse({"result": True})
-    else:
         return JsonResponse({'result': False})
 
 
-@api_view(['GET'])
+@csrf_exempt
+def register_professor(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        data['is_professor'] = True
+        serializer = CustomUserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
 def get_professors(request):
-    professors = CustomUser.objects.filter(
-        is_professor=True, is_active=True
-        ).values(
-            'username', 'email', 'first_name', 'last_name', 'profile_photo'
-            )
-    return JsonResponse({'result': list(professors)})
+    if request.method == 'GET':
+        professors = User.objects.filter(is_professor=True, is_active=True)
+        serializer = CustomUserSerializer(professors, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
-
-@api_view(['GET'])
+# TODO: complete this!
+@csrf_exempt
 def get_top_professors(request):
     top_rates = ProfessorRate.objects.all().order_by('-overall_score').values()
     top_professors = []
 
     for rate in top_rates:
-        professor = CustomUser.objects.get(username=rate['professor_id'])
+        professor = User.objects.get(username=rate['professor_id'])
         json = {
                 'username': professor.username,
                 'first_name': professor.first_name,
@@ -79,15 +71,14 @@ def get_top_professors(request):
     return JsonResponse({'result': top_professors})
 
 
-@api_view(['GET'])
+@csrf_exempt
 def get_courses(request, professor_id):
     professor = get_object_or_404(CustomUser, username=professor_id)
     courses = Course.objects.filter(professor=professor).values()
     return JsonResponse({'result': list(courses)})
 
 
-@login_required
-@api_view(['POST'])
+@csrf_exempt
 def add_course(request, professor_id):
     user = request.user
     if user.is_active and user.is_professor:
@@ -105,15 +96,14 @@ def add_course(request, professor_id):
     return JsonResponse({'detail': 'user is not authenticated'})
 
 
-@api_view(['GET'])
+@csrf_exempt
 def get_rates(request, professor_id):
     professor = get_object_or_404(CustomUser, username=professor_id)
     rates = ProfessorRate.objects.filter(professor=professor).values()
     return JsonResponse({'result': list(rates)})
 
 
-@login_required
-@api_view(['POST'])
+@csrf_exempt
 def submit_rate(request):
     # with professor id and user id
     user = request.user

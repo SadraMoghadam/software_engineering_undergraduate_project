@@ -4,44 +4,37 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
 from rest_framework.parsers import JSONParser
-from rest_framework.decorators import api_view
 
-from .models import CustomUser
+from user.models import CustomUser
+from user.serializers import CustomUserSerializer
 
 
 @csrf_exempt
 def login_user(request):
-    data = JSONParser().parse(request)
-    username = int(data.get('username'))
-    password = data.get('password')
-    user = authenticate(username=username, password=password)
-    if user:
-        if user.is_active and (not user.is_professor):
-            _login(request, user)
-        if user.is_authenticated:
-            return JsonResponse({'result': True})
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        username = int(data.get('username'))
+        password = data.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active and (not user.is_professor):
+                _login(request, user)
+            if user.is_authenticated:
+                return JsonResponse({'result': True})
 
-    return JsonResponse({'result': False})
-
-
-@api_view(['POST'])
-def register_user(request):
-    data = request.POST
-    first_name = data.get('first_name')
-    last_name = data.get('last_name')
-    email = data.get('email')
-    username = int(data.get('username'))
-    password = data.get('password')
-
-    user = CustomUser.objects.create_user(
-        username=username, email=email, password=password,
-        first_name=first_name, last_name=last_name, is_professor=False)
-
-    if user:
-        user.save()
-        return JsonResponse({"result": True})
-    else:
         return JsonResponse({'result': False})
+
+
+@csrf_exempt
+def register_user(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        data['is_professor'] = False
+        serializer = CustomUserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 
 def get_users(request):
