@@ -20,6 +20,20 @@ class Addpage extends React.Component{
           }
       }
 
+      ShowAddCourseForm = () => {
+        var z = document.getElementById("myDIV3");
+        if (window.getComputedStyle(z).visibility === "hidden") {
+            z.style.visibility = "visible";
+          }
+      }
+
+      ShowAddDepForm = () => {
+        var o = document.getElementById("myDIV4");
+        if (window.getComputedStyle(o).visibility === "hidden") {
+            o.style.visibility = "visible";
+          }
+      }
+
    render(){
        return(
 <div>
@@ -32,12 +46,13 @@ class Addpage extends React.Component{
          <span className = "cross"></span>
           <i></i><p>دانشگاه</p>
             </button>
-            <div id="myDIV">
+            <div id="myDIV" className="addForm">
                 <p>اضافه کردن دانشگاه</p>
             <form>
           <p>نام دانشگاه</p>
           <input type="text" name="" placeholder="نام دانشگاه را وارد کنید"></input>
-          <input type="submit" name="" value="تایید"></input>
+          <p></p>
+          <input type="submit" name="" value="تایید اطلاعات"></input>
         </form>
         </div>
             </div>
@@ -47,19 +62,53 @@ class Addpage extends React.Component{
          <span className="fl"></span><span className="sfl"></span><span className = "cross"></span>
           <i></i><p>استاد</p>
           </button>
-          <div id="myDIV2">
+          <div id="myDIV2" className="addForm">
                 <p>اضافه کردن استاد</p>
             <form>
           <p>نام استاد</p>
           <input type="text" name="" placeholder="نام استاد را وارد کنید"></input>
-          <p>سایر اطلاعات</p>
-          <input type="text" name="" placeholder="سایر اطلاعات استاد را وارد کنید"></input>
-          <input type="submit" name="" value="تایید"></input>
+          <p>دانشگاه استاد</p>
+          <input type="text" name="" placeholder="استاد مورد نظر در کدام دانشگاه تدریس میکند"></input>
+          <p></p>
+          <input type="submit" name="" value="تایید اطلاعات"></input>
         </form>
         </div>
         </div>
+
+        <div className="addCoursebtn">
+            <button onClick={this.ShowAddCourseForm} className="bt more-bt" href="javascript:void(0)">
+         <span className="fl"></span><span className="sfl"></span>
+         <span className = "cross"></span>
+          <i></i><p>درس</p>
+            </button>
+            <div id="myDIV3" className="addForm">
+                <p>اضافه کردن درس جدید</p>
+            <form>
+          <p>نام درس</p>
+          <input type="text" name="" placeholder="نام درس را وارد کنید"></input>
+          <p></p>
+          <input type="submit" name="" value=" تایید اطلاعات"></input>
+        </form>
+        </div>
+            </div>
+
+            <div className="addDepartmentbtn">
+            <button onClick={this.ShowAddDepForm} className="bt more-bt" href="javascript:void(0)">
+         <span className="fl"></span><span className="sfl"></span>
+         <span className = "cross"></span>
+          <i></i><p>دانشکده</p>
+            </button>
+            <div id="myDIV4" className="addForm">
+                <p>اضافه کردن دانشکده جدید</p>
+            <form>
+          <p>نام درس</p>
+          <input type="text" name="" placeholder="نام دانشکده را وارد کنید"></input>
+          <p></p>
+          <input type="submit" name="" value="تایید اطلاعات"></input>
+        </form>
+        </div>
+            </div>
            </div>   
-        
 </div>
        );
    }
