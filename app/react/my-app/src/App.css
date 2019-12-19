@@ -584,3 +584,22 @@ body{
   text-align: right;
   border-radius: 20px;
 }
+
+
+#myDIV{
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+  visibility: hidden;
+}
+
+#myDIV2{
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: rgb(102, 214, 145);
+  margin-top: 20px;
+  visibility: hidden;
+}
