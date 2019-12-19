@@ -5,7 +5,9 @@ import '../App.css'
 import Login from './Login';
 import { Redirect } from 'react-router-dom';
 
+  
 class Header extends Component {
+
     state = {
         redirectLoginReg: false,
         redirectHome: false
@@ -44,6 +46,7 @@ class Header extends Component {
             {this.renderRedirectLoginReg()}
                 ورود / ثبت نام
             </div>
+            
             <div className="homeButton" onClick={this.setRedirectHome}>
             {this.renderRedirectHome()}   
             </div>
@@ -56,7 +59,9 @@ class Header extends Component {
             <form className="searchBar">
                 <input type = "text" name = "search" placeholder = "استاد یا دانشگاه مورد نظر خود را جستجو کنید"></input>
             </form>
-        </div>);
+            </div>
+        
+        );
     }
 }
 
