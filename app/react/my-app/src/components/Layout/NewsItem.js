@@ -18,7 +18,6 @@ export class NewsItem extends Component {
         return (
             <a href={url}>
             <div className="newsItem">
-            
                 <h2>
                     { title }
                 </h2>
