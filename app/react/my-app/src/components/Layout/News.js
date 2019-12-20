@@ -6,7 +6,7 @@ class News extends Component {
 
     render() {
         return this.props.newsList.map((news) => (
-            <NewsItem key = {news.id} news = {news}/>
+            <NewsItem key = {news.id} news = {news} url = {news.url}/>
         ));
     }
 }

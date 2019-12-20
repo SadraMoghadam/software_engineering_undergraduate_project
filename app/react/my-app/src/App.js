@@ -7,6 +7,7 @@ import RegisterOstad from './components/RegisterOstad';
 import ProfessorRate from './components/ProfessorRate';
 import UniversityRate from './components/UniversityRate';
 import Addpage from './components/Addpage';
+import Test from './components/Test';
 import './App.css';
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 import CommentForm from './components/Layout/Comment';
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/UniversityRate" component={UniversityRate}/>
         <Route exact path="/Comment" component={CommentForm}/>
         <Route exact path="/Addpage" component={Addpage}/>
+        <Route exact path="/Test" component={Test}/>
       </Switch>
     </Router>
     
