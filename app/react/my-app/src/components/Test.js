@@ -2,16 +2,35 @@
 import React, {Component} from 'react';
 import '../newCss.css';
 import News from './Layout/News';
+import axios from 'axios';
 
 import Header from './Header';
 
 class Test extends Component {
+    sendPost = event => {
+        const headers = {
+            'Content-Type': 'application/json',
+        }
+        const data = {
+            "comment": "Test react",
+            "total_score": 4,
+            "food_rate": 4,
+            "security_rate": 4,
+            "location_rate": 4,
+            "facility_rate": 4,
+            "internet_rate": 4
+        }
+
+        axios.get('/university/get-university-rates/1/', data, {headers:headers}).then(
+            res => console.log(res.data)
+          )          
+    }
     render() {
         return(
             <div className="Home">
             <Header/>
             <div className="Test">
-                <button>sssssss</button>
+                <button onClick={this.sendPost}>send post</button>
             </div>
             </div>
         );

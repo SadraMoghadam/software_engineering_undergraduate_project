@@ -21,9 +21,10 @@ def login_user(request):
         if user:
             if user.is_active and (not user.is_professor):
                 _login(request, user)
-            if user.is_authenticated:
                 return JsonResponse({'result': True})
 
+        return JsonResponse({'result': False})
+    else:
         return JsonResponse({'result': False})
 
 

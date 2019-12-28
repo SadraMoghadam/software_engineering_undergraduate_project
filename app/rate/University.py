@@ -66,6 +66,8 @@ def get_rates(request, university_id):
                     {'errors': ['User is not authenticated'], },
                     status=403
                     )
+    else:
+        return JsonResponse({'result': False})
 
 
 @csrf_exempt
