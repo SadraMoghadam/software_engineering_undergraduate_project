@@ -5,7 +5,8 @@ from django.http import JsonResponse
 
 from rest_framework.parsers import JSONParser
 
-from user.serializers import CustomUserSerializer
+from user.serializers import CustomUserCreateSerializer,\
+    CustomUserReadSerializer
 
 
 @csrf_exempt
@@ -36,7 +37,7 @@ def register_user(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
         data['is_professor'] = False
-        serializer = CustomUserSerializer(data=data)
+        serializer = CustomUserCreateSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)

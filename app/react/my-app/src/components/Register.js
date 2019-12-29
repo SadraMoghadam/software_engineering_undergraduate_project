@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import logo from '../images/ostadrate.png';
 import { Redirect } from 'react-router-dom';
 import '../App.css';
+import axios from 'axios';
 
 class Register extends Component {
   state = {
@@ -18,6 +19,30 @@ class Register extends Component {
   renderRedirectHome = () => {
     if (this.state.redirectHome) {
       return <Redirect to='./' />
+    }
+  }
+
+  doRegister = e => {
+    e.preventDefault();
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var password1 = document.getElementById("password1").value;
+    var password2 = document.getElementById("password2").value;
+
+    if (password1 === password2){
+      const headers = {
+        'Content-Type': 'application/json',
+      }
+      const data = {
+        "username": username,
+        "email": email,
+        "password": password2
+      }
+      axios.post('/user/register-user/', data, {headers: headers}).then(
+        res => console.log(res.data)
+      )
+    }else{
+      alert("رمز عبور مطابقت ندارد")
     }
   }
 
@@ -37,15 +62,15 @@ class Register extends Component {
       <div className="registerbox">
         <h2>ثبت نام دانشجو</h2>
         
-        <form>
+        <form onSubmit={this.doRegister}>
           <p>شماره دانشجویی</p>
-          <input type="text" name="" placeholder="شماره دانشجویی خود را وارد کنید"></input>
+          <input type="text" name="" id="username" placeholder="شماره دانشجویی خود را وارد کنید"></input>
           <p>ایمیل</p>
-          <input type="text" name="" placeholder="ایمیل خود را وارد کنید"></input>
+          <input type="email" name="" id="email" placeholder="ایمیل خود را وارد کنید"></input>
           <p>رمز عبور</p>
-          <input type="password" name="" placeholder="**********"></input>
+          <input type="password" name="" id="password1" placeholder="**********"></input>
           <p>تایید رمز عبور</p>
-          <input type="password" name="" placeholder="**********"></input>
+          <input type="password" name="" id="password2" placeholder="**********"></input>
           <input type="submit" name="" value="تایید"></input>
         </form>
         </div> 
